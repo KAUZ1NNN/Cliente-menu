@@ -7,7 +7,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// 🔑 Supabase
 const supabaseUrl = 'https://wfklpvkuhjfubohmiiwx.supabase.co';
 const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indma2xwdmt1aGpmdWJvaG1paXd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxODM5MDUsImV4cCI6MjA2Mzc1OTkwNX0.hKhUCZeZEzxgrVCDhDuZysqmR41zQOHlknTDf3lr6ww'; // (mantenha em segredo em produção)
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -15,14 +14,13 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 (async () => {
   const { error } = await supabase.from('orders').select('*').limit(1);
   if (error) {
-    console.error('❌ Erro ao conectar com o Supabase:', error.message);
+    console.error(' Erro ao conectar com o Supabase:', error.message);
   } else {
-    console.log('✅ Supabase conectado com sucesso!');
+    console.log(' Supabase conectado com sucesso!');
   }
 })();
 
 
-// 🧾 Rota para novo pedido
 app.post('/pedido', async (req, res) => {
   const { itens } = req.body;
   const order_id = uuidv4();
@@ -41,7 +39,6 @@ app.post('/pedido', async (req, res) => {
   res.json({ order_id });
 });
 
-// 🧾 Buscar status do pedido
 app.get('/pedido/:order_id', async (req, res) => {
   const { order_id } = req.params;
   const { data, error } = await supabase
