@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 const supabaseUrl = 'https://wfklpvkuhjfubohmiiwx.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indma2xwdmt1aGpmdWJvaG1paXd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxODM5MDUsImV4cCI6MjA2Mzc1OTkwNX0.hKhUCZeZEzxgrVCDhDuZysqmR41zQOHlknTDf3lr6ww'; // (mantenha em segredo em produção)
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indma2xwdmt1aGpmdWJvaG1paXd4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgxODM5MDUsImV4cCI6MjA2Mzc1OTkwNX0.hKhUCZeZEzxgrVCDhDuZysqmR41zQOHlknTDf3lr6ww'; 
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 (async () => {
