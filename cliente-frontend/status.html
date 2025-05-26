@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Status do Pedido</title>
+  <style>
+    body { font-family: Arial; padding: 20px; text-align: center; }
+    .em-preparo { color: orange; }
+    .pronto { color: green; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>Status do Pedido</h1>
+  <div id="status">Carregando...</div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderId = urlParams.get("order_id");
+
+    async function buscarStatus() {
+      const resposta = await fetch(`http://localhost:3002/pedido/${orderId}`);
+      const data = await resposta.json();
+
+      if (data.length === 0) {
+        document.getElementById("status").innerText = "Pedido não encontrado.";
+        return;
+      }
+
+      const statusAtual = data[0].status;
+      document.getElementById("status").innerHTML =
+        statusAtual === "pronto"
+          ? `<p class="pronto">Seu pedido está pronto! 🎉</p>`
+          : `<p class="em-preparo">Seu pedido está em preparo...</p>`;
+    }
+
+    buscarStatus();
+    setInterval(buscarStatus, 3000); // Atualiza a cada 3 segundos
+  </script>
+</body>
+</html> 
